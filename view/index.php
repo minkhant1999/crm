@@ -1,12 +1,5 @@
 <?php
-$url = 'localhost';
-$username = 'root';
-$password = '';
-$conn = mysqli_connect($url, $username, $password, "achievement crm");
-if (!$conn) {
-    die('Could not Connect My Sql:');
-}
-$result = mysqli_query($conn, "SELECT * FROM product");
+require "./config/Database.php";
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -43,7 +36,7 @@ $result = mysqli_query($conn, "SELECT * FROM product");
 
     <!-- Modal -->
     <div class="ui basic modal">
-        <form class="ui form">
+        <form class="ui form" method="POST" action="../../create.php">
             <div class="field">
                 <h2><label>Product name</label></h2>
                 <input type="text" name="product_name">
@@ -77,6 +70,7 @@ $result = mysqli_query($conn, "SELECT * FROM product");
             </div>
             <button class="ui button" type="submit" name="save">SAVE</button>
         </form>
+
     </div>
     <button class="ui basic button" onclick="$('.ui.basic.modal').modal('show')">Product</button>
 
