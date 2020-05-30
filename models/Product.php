@@ -15,6 +15,7 @@ class Product
   public $visible_to;
   public $unit;
   public $tax;
+  public $custom_attribute;
 
 
 
@@ -35,7 +36,7 @@ class Product
     //                             ORDER BY
     //                               p.created_at DESC';
     // Create query
-    $query = 'SELECT id,name,product_code,category,prices,active_flag,visible_to,unit,tax
+    $query = 'SELECT id,name,product_code,category,prices,active_flag,visible_to,unit,tax,custom_attribute
                                 FROM ' . $this->table;
 
 
@@ -82,8 +83,9 @@ class Product
   // Create Post
   public function create()
   {
+
     // Create query
-    $query = 'INSERT INTO ' . $this->table . ' SET name = :name,product_code = :product_code,category = :category,prices = :prices, active_flag = :active_flag, visible_to = :visible_to,unit = :unit, tax = :tax';
+    $query = 'INSERT INTO ' . $this->table . ' SET name = :name,product_code = :product_code,category = :category,prices = :prices, active_flag = :active_flag, visible_to = :visible_to,unit = :unit, tax = :tax,custom_attribute = :custom_attribute';
 
     // Prepare statement
     $stmt = $this->conn->prepare($query);
@@ -97,6 +99,7 @@ class Product
     $this->visible_to = htmlspecialchars(strip_tags($this->visible_to));
     $this->unit = htmlspecialchars(strip_tags($this->unit));
     $this->tax = htmlspecialchars(strip_tags($this->tax));
+    $this->custom_attribute = htmlspecialchars(strip_tags($this->custom_attribute));
 
     // Bind data
     $stmt->bindParam('name', $this->name);
@@ -107,6 +110,7 @@ class Product
     $stmt->bindParam('visible_to', $this->visible_to);
     $stmt->bindParam('unit', $this->unit);
     $stmt->bindParam('tax', $this->tax);
+    $stmt->bindParam('custom_attribute', $this->custom_attribute);
 
     // Execute query
     if ($stmt->execute()) {

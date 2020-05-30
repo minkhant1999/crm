@@ -6,7 +6,7 @@ $conn = mysqli_connect($url, $username, $password, "achievement crm");
 if (!$conn) {
     die('Could not Connect My Sql:');
 }
-$result = mysqli_query($conn, "SELECT * FROM product");
+$result = mysqli_query($conn, "INSERT into custom_product");
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -19,7 +19,6 @@ $result = mysqli_query($conn, "SELECT * FROM product");
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="./dist/semantic.js" defer></script>
 </head>
-
 
 <body>
     <div class="ui attached stackable menu">
@@ -39,63 +38,34 @@ $result = mysqli_query($conn, "SELECT * FROM product");
             </div>
         </div>
     </div>
-    <!-- <button type="button" class="fa fa-plus" data-toggle="modal" data-target="#myModal">Product</button> -->
-
     <!-- Modal -->
     <div class="ui basic modal">
-        <form class="ui form">
+        <form class="ui form" action="" method="post">
+            <h4 class="ui dividing header">Add Product Field</h4>
             <div class="field">
-                <h2><label>Product name</label></h2>
-                <input type="text" name="product_name">
+                <h2><label>Field name</label></h2>
+                <input type="text" name="name">
             </div>
             <div class="field">
-                <h2><label>Product code</label></h2>
-                <input type="text" name="product_code">
+                <h2><label>Field type</label></h2>
+                <input type="text" name="field_type">
             </div>
             <div class="field">
-                <h2><label>Category</label></h2>
-                <input type="text" name="category_id">
+                <h2><label>Field properties</label></h2>
             </div>
             <div class="field">
-                <h2><label>Unit</label></h2>
-                <input type="text" name="unit">
+                <label>Detail view</label>
+                <input type="checkbox" name="detail_view" value="detail_view"></input>
             </div>
             <div class="field">
-                <h2><label>Unit price</label></h2>
-                <input type="text" name="unit_price">
-                <input type="text" name="currency" placeholder="$">
-            </div>
-            <!-- append custom field here -->
-            <div class="field">
-                <select>
-                    <option value="">Visibility</option>
-                    <option value="0">Owner's only</option>
-                    <option value="1">Ower's visibility groups</option>
-                    <option value="2">Entire Company</option>
-                    <option value="3">Ower's groups and sub-groups</option>
-                </select>
+                <label>Add view</label>
+                <input type="checkbox" name="add_view" value="add_view">
+                </input>
             </div>
             <button class="ui button" type="submit" name="save">SAVE</button>
         </form>
     </div>
-    <button class="ui basic button" onclick="$('.ui.basic.modal').modal('show')">Product</button>
-
-    <!-- <div class="ui cards">
-
-        <template>
-            <div class="card">
-                <div class="content">
-                    <div class="header"></div>
-                    <div class="meta"></div>
-                    <div class="description"></div>
-                </div>
-            </div>
-        </template>
-
-        <script src="./products.js"></script>
-    </div> -->
-
+    <button class="ui basic button" onclick="$('.ui.basic.modal').modal('show')">Add product field</button>
 </body>
-
 
 </html>

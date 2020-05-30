@@ -3,7 +3,7 @@ class ProductCustomField
 {
     // DB stuff
     private $conn;
-    private $table = 'product_custom_field';
+    private $table = 'custom_product_field';
 
     // Product Properties
     public $id;
@@ -77,8 +77,10 @@ class ProductCustomField
     // Create Post
     public function create()
     {
+
         // Create query
         $query = 'INSERT INTO ' . $this->table . ' SET name = :name,field_type = :field_type,detail_view = :detail_view,add_view = :add_view,visible_to = :visible_to,active_flag = :active_flag';
+        //  && 'INSERT INTO "product" 
 
         // Prepare statement
         $stmt = $this->conn->prepare($query);

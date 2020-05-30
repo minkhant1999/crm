@@ -25,13 +25,14 @@ $ProductCustomField->add_view = $data->add_view;
 $ProductCustomField->visible_to = $data->visible_to;
 $ProductCustomField->active_flag = $data->active_flag;
 
-// Create new team
+// Create new custom field
 if ($ProductCustomField->create()) {
     echo json_encode(
-        array('message' => 'Team Created')
+        array('message' => 'New Product Field Created')
+
     );
 } else {
     echo json_encode(
-        array('message' => 'Team Not Created')
+        array('message' => 'Failed')
     );
 }
