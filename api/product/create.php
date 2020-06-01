@@ -8,6 +8,25 @@ header('Access-Control-Allow-Headers: Access-Control-Allow-Headers,Content-Type,
 include_once '../../config/Database.php';
 include_once '../../models/Product.php';
 include_once '../../view/index.php';
+// php trick
+if (isset($_GET['order_id']) && $_GET['order_id'] != "") {
+  include('db.php');
+  $order_id = $_GET['order_id'];
+  $result = mysqli_query($con, "SELECT * FROM `transactions` WHERE order_id=$order_id");
+  if (mysqli_num_rows($result) > 0) {
+    $row = mysqli_fetch_array($result);
+    $amount = $row['amount'];
+    $response_code = $row['response_code'];
+    $response_desc = $row['response_desc'];
+    response($order_id, $amount, $response_code, $response_desc);
+    mysqli_close($con);
+  } else {
+    response(NULL, NULL, 200, "No Record Found");
+  }
+} else {
+  response(NULL, NULL, 400, "Invalid Request");
+};
+// php trick end//
 if (isset($_POST['save'])) {
   // Instantiate DB & connect
   $database = new Database();
