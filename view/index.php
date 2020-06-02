@@ -1,6 +1,8 @@
 <?php
 include_once 'db.php';
 $result = mysqli_query($con, "SELECT * FROM product");
+$result2 = mysqli_query($con, "SELECT * FROM category");
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -34,28 +36,15 @@ $result = mysqli_query($con, "SELECT * FROM product");
             </div>
             <div class="field">
                 <h2><label>Category</label></h2>
-                <select category name='NEW'>
-                    <option value="">--- Select ---</option>
-                    <?  
-                mysql_connect ("localhost","root","");  
-                mysql_select_db ("achievement crm");  
-                $select="achievement crm";  
-                if (isset ($select)&&$select!=""){  
-                $select=$_POST ['NEW'];  
-            }  
-            ?>
-                    <?  
-                $list=mysql_query("select * from category order by category_id asc");  
-            while($row_list=mysql_fetch_assoc($list)){  
-                ?>
-                    <option value="<? echo $row_list['category_id']; ?>" <? if($row_list['category_id']==$select){
-                        echo "selected" ; } ?>>
-                        <?echo $row_list['category_name'];?>
-                    </option>
-                    <?  
-                }  
-                ?>
+                <select>
+                    <?php
+                    while ($row = mysqli_fetch_array($result2)) :; ?>
+
+                    <option value="<?php echo $row[0]; ?>"><?php echo $row[1]; ?></option>
+
+                    <?php endwhile; ?>
                 </select>
+
             </div>
             <div class="field">
                 <h2><label>Unit</label></h2>
