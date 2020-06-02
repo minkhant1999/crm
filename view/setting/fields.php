@@ -12,7 +12,7 @@
 
 <body>
     <?php
-    include "header.php";
+    include("../header.php");
     ?>
     <div class="ui basic modal">
         <form class="ui form" action="" method="post">

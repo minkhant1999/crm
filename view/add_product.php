@@ -12,6 +12,7 @@ if (isset($_POST['save'])) {
 
     if (mysqli_query($con, $sql)) {
         echo "New product created successfully !";
+
     } else {
         echo "Error: " . $sql . "
 " . mysqli_error($con);
