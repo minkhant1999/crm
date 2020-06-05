@@ -80,9 +80,40 @@ $result3 = mysqli_query($con, "SELECT * FROM owner_visibility_group");
         <div class="ui simple dropdown item">
             <i class="dropdown icon"></i>
             <div class="menu">
-                <div class="item">Choice 1</div>
+                <div class="item">
+                    <div class="item">
+                        <div class="ui search">
+                            <div class="ui icon input">
+                                <input class="prompt" type="text" placeholder="Search owner or filter">
+                                <i class="search icon"></i>
+                            </div>
+                            <div class="results"></div>
+                        </div>
+                        <div class="ui tab">
+                            <a class="item" data-tab="first"><i class="star icon"></i>Favourites</a>
+                            <a class="item" data-tab="second"><i class="user icon"></i>Owners</a>
+                            <a class="item" data-tab="third"><i class="filter icon"></i>Filters</a>
+                        </div>
+                        <div class="ui bottom attached tab segment" data-tab="first">
+                            First
+                        </div>
+                        <div class="ui bottom attached tab segment" data-tab="second">
+                            Second
+                        </div>
+                        <div class="ui bottom attached tab segment" data-tab="third">
+                            Third
+                        </div>
+                        <script>
+                        $('.tab .item')
+                            .tab();
+                        </script>
+                    </div>
+                </div>
                 <div class="item">Choice 2</div>
-                <div class="item">Choice 3</div>
+                <div class="item"><button class="ui labeled icon button">
+                        <i class="filter icon"></i>
+                        Add new filter
+                    </button></div>
             </div>
         </div>
     </div>
@@ -102,9 +133,9 @@ $result3 = mysqli_query($con, "SELECT * FROM owner_visibility_group");
                             <div class="ui simple dropdown item">
                                 <i class="setting icon"></i>
                                 <div class="menu">
-                                    <div class="item">Choice 1</div>
+
                                     <div class="item">Choice 2</div>
-                                    <div class="item">Choice 3</div>
+                                    <div class="item"></div>
                                 </div>
                             </div>
                         </div>
