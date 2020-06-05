@@ -71,39 +71,74 @@ $result3 = mysqli_query($con, "SELECT * FROM owner_visibility_group");
 
     </div>
     <button class="ui basic button" onclick="$('.ui.basic.modal').modal('show')">Product</button>
+    <div class="extra content">
+        <a>
+            4 products
+        </a>
+    </div>
+    <div class="ui compact menu">
+        <div class="ui simple dropdown item">
+            <i class="dropdown icon"></i>
+            <div class="menu">
+                <div class="item">Choice 1</div>
+                <div class="item">Choice 2</div>
+                <div class="item">Choice 3</div>
+            </div>
+        </div>
+    </div>
+
     <!-- retrieve data with table from product table -->
     <?php
     if (mysqli_num_rows($result) > 0) {
     ?>
-    <table class="ui celled table">
-        <thead>
-            <tr>
-                <th>Name</th>
-                <th>Product code</th>
-            </tr>
-        </thead>
-        <?php
-            $i = 0;
-            while ($row = mysqli_fetch_array($result)) {
-            ?>
-        <tbody>
-            <tr>
-                <td>
-                    <p><?= $row["product_name"]; ?></p>
-                    <button class="right attached ui button" onclick="clickOnPN('p')">Edit</button>
-                </td>
+    <div class="container">
+        <table class="ui celled table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Product code</th>
+                    <th>
+                        <div class="ui compact menu">
+                            <div class="ui simple dropdown item">
+                                <i class="setting icon"></i>
+                                <div class="menu">
+                                    <div class="item">Choice 1</div>
+                                    <div class="item">Choice 2</div>
+                                    <div class="item">Choice 3</div>
+                                </div>
+                            </div>
+                        </div>
+                    </th>
 
-                <td><?= $row["product_code"]; ?>
-                    <span><button class="right attached ui button">Edit</button></span></td>
-                <td></td>
-            </tr>
-        </tbody>
-        <?php
-                $i++;
-            }
-            ?>
-    </table>
 
+                </tr>
+            </thead>
+            <?php
+                $i = 0;
+                while ($row = mysqli_fetch_array($result)) {
+                ?>
+            <tbody>
+                <tr>
+                    <td>
+                        <p><?= $row["product_name"]; ?></p>
+                        <button class="right attached ui button" onclick="clickOnPN('p')">Edit</button>
+                    </td>
+
+                    <td><?= $row["product_code"]; ?>
+                        <span><button class="right attached ui button">Edit</button></span></td>
+                    <td>
+
+                    </td>
+
+                </tr>
+
+            </tbody>
+            <?php
+                    $i++;
+                }
+                ?>
+        </table>
+    </div>
     <?php
     } else {
         echo "No product here";
