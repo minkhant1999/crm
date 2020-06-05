@@ -2,6 +2,7 @@
 include_once 'db.php';
 $result = mysqli_query($con, "SELECT * FROM product");
 $result2 = mysqli_query($con, "SELECT * FROM category");
+$result3 = mysqli_query($con, "SELECT * FROM owner_visibility_group");
 
 ?>
 <!DOCTYPE html>
@@ -36,11 +37,10 @@ $result2 = mysqli_query($con, "SELECT * FROM category");
             </div>
             <div class="field">
                 <h2><label>Category</label></h2>
-                <select>
+                <select name="category_name">
                     <?php
-                    while ($row = mysqli_fetch_array($result2)) :; ?>
-
-                    <option value="<?php echo $row[0]; ?>"><?php echo $row[1]; ?></option>
+                    while ($row = mysqli_fetch_array($result2)) :; ?> <option value="<?php echo $row[0]; ?>">
+                        <?php echo $row[1]; ?></option>
 
                     <?php endwhile; ?>
                 </select>
@@ -57,12 +57,13 @@ $result2 = mysqli_query($con, "SELECT * FROM category");
             </div>
             <!-- append custom field here -->
             <div class="field">
-                <select>
-                    <option value="">Visibility</option>
-                    <option value="0">Owner's only</option>
-                    <option value="1">Ower's visibility groups</option>
-                    <option value="2">Entire Company</option>
-                    <option value="3">Ower's groups and sub-groups</option>
+                <select name="visibility">
+                    <?php
+                    while ($row = mysqli_fetch_array($result3)) :; ?>
+                    <option value="<?php echo $row[0]; ?>">
+                        <?php echo $row[1]; ?></option>
+
+                    <?php endwhile; ?>
                 </select>
             </div>
             <button class="ui button" type="submit" name="save">SAVE</button>
@@ -85,22 +86,34 @@ $result2 = mysqli_query($con, "SELECT * FROM category");
             $i = 0;
             while ($row = mysqli_fetch_array($result)) {
             ?>
-        <tbody></tbody>
-        <tr>
-            <td><?php echo $row["product_name"]; ?></td>
-            <td><?php echo $row["product_code"]; ?></td>
-            <td></td>
-        </tr>
+        <tbody>
+            <tr>
+                <td>
+                    <p><?= $row["product_name"]; ?></p>
+                    <button class="right attached ui button" onclick="clickOnPN('p')">Edit</button>
+                </td>
+
+                <td><?= $row["product_code"]; ?>
+                    <span><button class="right attached ui button">Edit</button></span></td>
+                <td></td>
+            </tr>
+        </tbody>
         <?php
                 $i++;
             }
             ?>
     </table>
+
     <?php
     } else {
         echo "No product here";
     }
     ?>
+    <script>
+    function clickOnPN(name) {
+        $('p').empty()
+    }
+    </script>
 
 
     <!-- <div class="ui cards">

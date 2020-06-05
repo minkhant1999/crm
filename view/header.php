@@ -2,11 +2,8 @@
     <div class="ui container">
         <a class="item"><i class="home icon"></i>Home</a>
         <a class="item" href="deals.php"><i class="grid layout icon"></i>Deals</a>
-        <a class="item" href="deals.php"><i class="mail icon"></i>Mail</a>
-        <a class="item" href="deals.php"><i class="grid layout icon"></i>Activities</a>
         <a class="item" href="deals.php"><i class="grid layout icon"></i>Contact</a>
         <a class="item" href="deals.php"><i class="grid layout icon"></i>Product</a>
-        <a class="item" href="deals.php"><i class="grid layout icon"></i>Progress</a>
         <!-- Search bar Search bar search bar -->
         <div class="right item">
             <div class="ui input"><input type="text" placeholder="Search..."></div>
