@@ -117,6 +117,17 @@ $result3 = mysqli_query($con, "SELECT * FROM owner_visibility_group");
             </div>
         </div>
     </div>
+    <div class="ui compact menu">
+        <div class="ui simple dropdown item">
+            ...
+            <!-- <i class="setting icon"></i> -->
+            <div class="menu">
+                <div class="item" onclick="$('.ui.basic.modal').modal('show')">Export filter results...</div>
+                <div class=" item">Data import...</div>
+                <div class="item">Choice 3</div>
+            </div>
+        </div>
+    </div>
 
     <!-- retrieve data with table from product table -->
     <?php
