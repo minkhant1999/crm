@@ -71,12 +71,12 @@ $result3 = mysqli_query($con, "SELECT * FROM owner_visibility_group");
 
     </div>
     <button class="ui basic button" onclick="$('.ui.basic.modal').modal('show')">Product</button>
-    <div class="extra content">
-        <a>
-            4 products
-        </a>
-    </div>
-    <div class="ui compact menu">
+    <!-- <div class="ui container">
+        <div class="extra content" style="position:absolute;left:1300px;">
+            <a>4 products</a>
+        </div>
+    </div> -->
+    <div class="ui compact menu" style="position:absolute;left:1400px;">
         <div class="ui simple dropdown item">
             <i class="dropdown icon"></i>
             <div class="menu">
@@ -89,7 +89,7 @@ $result3 = mysqli_query($con, "SELECT * FROM owner_visibility_group");
                             </div>
                             <div class="results"></div>
                         </div>
-                        <div class="ui tab">
+                        <div class="ui container">
                             <a class="item" data-tab="first"><i class="star icon"></i>Favourites</a>
                             <a class="item" data-tab="second"><i class="user icon"></i>Owners</a>
                             <a class="item" data-tab="third"><i class="filter icon"></i>Filters</a>
@@ -110,14 +110,16 @@ $result3 = mysqli_query($con, "SELECT * FROM owner_visibility_group");
                     </div>
                 </div>
                 <div class="item">Choice 2</div>
-                <div class="item"><button class="ui labeled icon button">
+                <div class="item">
+                    <button class="ui labeled icon button">
                         <i class="filter icon"></i>
                         Add new filter
-                    </button></div>
+                    </button>
+                </div>
             </div>
         </div>
     </div>
-    <div class="ui compact menu">
+    <div class="ui compact menu" style="position:absolute;left:1500px;">
         <div class="ui simple dropdown item">
             ...
             <!-- <i class="setting icon"></i> -->
@@ -137,6 +139,12 @@ $result3 = mysqli_query($con, "SELECT * FROM owner_visibility_group");
         <table class="ui celled table">
             <thead>
                 <tr>
+                    <th>
+                        <div class="ui checkbox">
+                            <input type="checkbox" name="example">
+                            <label></label>
+                        </div>
+                    </th>
                     <th>Name</th>
                     <th>Product code</th>
                     <th>
@@ -144,15 +152,78 @@ $result3 = mysqli_query($con, "SELECT * FROM owner_visibility_group");
                             <div class="ui simple dropdown item">
                                 <i class="setting icon"></i>
                                 <div class="menu">
+                                    <div class="ui left aligned container">
 
-                                    <div class="item">Choice 2</div>
-                                    <div class="item"></div>
+                                        <div class="ui search">
+                                            <label>
+                                                <h3><span>Choose columns</span></h3>
+                                            </label>
+                                            <div class="ui icon input">
+                                                <input class="prompt" type="text" placeholder="Search owner or filter">
+                                                <i class="search icon"></i>
+                                            </div>
+                                            <div class="results"></div>
+                                        </div>
+                                        <div class="ui justified container">
+                                            <label>Visible</label>
+                                            <div class="field">
+                                                <div class="ui radio checkbox">
+                                                    <input type="radio" name="fruit" checked="" tabindex="0"
+                                                        class="hidden">
+                                                    <label>Name</label>
+                                                </div>
+                                            </div>
+                                            <div class="field">
+                                                <div class="ui radio checkbox">
+                                                    <input type="radio" name="fruit" checked="" tabindex="0"
+                                                        class="hidden">
+                                                    <label>Product code</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="ui justified container">
+                                            <label>Not visible</label>
+                                            <div class="field">
+                                                <div class="ui radio checkbox">
+                                                    <input type="radio" name="fruit" checked="" tabindex="0"
+                                                        class="hidden">
+                                                    <label>Tax</label>
+                                                </div>
+                                            </div>
+                                            <div class="field">
+                                                <div class="ui radio checkbox">
+                                                    <input type="radio" name="fruit" checked="" tabindex="0"
+                                                        class="hidden">
+                                                    <label>Unit</label>
+                                                </div>
+                                            </div>
+                                            <div class="field">
+                                                <div class="ui radio checkbox">
+                                                    <input type="radio" name="fruit" checked="" tabindex="0"
+                                                        class="hidden">
+                                                    <label>Category</label>
+                                                </div>
+                                            </div>
+                                            <div class="ui justified container">
+                                                <div class="field">
+                                                    <button class="ui labeled icon button">
+                                                        Default
+                                                    </button>
+                                                    <button class="ui labeled icon button">
+                                                        Cancel
+                                                    </button>
+                                                    <button class="ui labeled icon button" style="color:green;">
+                                                        Save
+                                                    </button>
+                                                </div>
+                                            </div>
+
+
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
                     </th>
-
-
                 </tr>
             </thead>
             <?php
@@ -161,6 +232,12 @@ $result3 = mysqli_query($con, "SELECT * FROM owner_visibility_group");
                 ?>
             <tbody>
                 <tr>
+                    <td>
+                        <div class="ui checkbox">
+                            <input type="checkbox" name="example">
+                            <label></label>
+                        </div>
+                    </td>
                     <td>
                         <p><?= $row["product_name"]; ?></p>
                         <button class="right attached ui button" onclick="clickOnPN('p')">Edit</button>
