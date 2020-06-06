@@ -1,5 +1,5 @@
 <div class="ui attached stackable menu">
-    <div class="ui container">
+    <div class="ui fluid container">
         <a class="item"><i class="home icon"></i>Home</a>
         <a class="item" href="deals.php"><i class="grid layout icon"></i>Deals</a>
         <a class="item" href="deals.php"><i class="grid layout icon"></i>Contact</a>
