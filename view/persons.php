@@ -1,10 +1,3 @@
-<?php
-include_once 'db.php';
-$result = mysqli_query($con, "SELECT * FROM product");
-$result2 = mysqli_query($con, "SELECT * FROM category");
-$result3 = mysqli_query($con, "SELECT * FROM owner_visibility_group");
-
-?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -17,7 +10,6 @@ $result3 = mysqli_query($con, "SELECT * FROM owner_visibility_group");
     <script src="./dist/semantic.js" defer></script>
 </head>
 
-
 <body>
     <div class="ui fluid container">
         <?php
@@ -25,17 +17,17 @@ $result3 = mysqli_query($con, "SELECT * FROM owner_visibility_group");
         ?>
         <!-- Modal -->
         <?php
-        include("product_modal.php");
+        include("persons_modal.php");
         ?>
         <!-- add button grid -->
         <div class="ui grid">
             <div class="left floated five wide column">
-                <p><button class="ui basic button" onclick="$('.ui.basic.modal').modal('show')">Product</button></p>
+                <p><button class="ui basic button" onclick="$('.ui.basic.modal').modal('show')">Person</button></p>
             </div>
 
             <!-- container -->
             <div class="right floated five wide column">
-                <label>4 products</label>
+                <label>4 persons</label>
                 <!-- middle dropdown -->
                 <div class="ui dropdown">
                     <i class="dropdown icon"></i>
@@ -100,9 +92,6 @@ $result3 = mysqli_query($con, "SELECT * FROM owner_visibility_group");
     </div>
 
     <!-- retrieve data with table from product table -->
-    <?php
-    if (mysqli_num_rows($result) > 0) {
-    ?>
 
     <table class="ui celled table">
         <thead>
@@ -190,10 +179,6 @@ $result3 = mysqli_query($con, "SELECT * FROM owner_visibility_group");
                 </th>
             </tr>
         </thead>
-        <?php
-            $i = 0;
-            while ($row = mysqli_fetch_array($result)) {
-            ?>
         <tbody>
             <tr>
                 <td>
@@ -203,11 +188,11 @@ $result3 = mysqli_query($con, "SELECT * FROM owner_visibility_group");
                     </div>
                 </td>
                 <td>
-                    <p><?= $row["product_name"]; ?></p>
+                    <p></p>
                     <!-- <button class="right attached ui button" onclick="clickOnPN('p')">Edit</button> -->
                 </td>
 
-                <td><?= $row["product_code"]; ?>
+                <td>
                     <!-- <span><button class="right attached ui button">Edit</button></span></td> -->
                 <td>
 
@@ -216,17 +201,9 @@ $result3 = mysqli_query($con, "SELECT * FROM owner_visibility_group");
             </tr>
 
         </tbody>
-        <?php
-                $i++;
-            }
-            ?>
     </table>
     </div>
-    <?php
-    } else {
-        echo "No product here";
-    }
-    ?>
+    </div>
     <script>
     function clickOnPN(name) {
         $('p').empty()
