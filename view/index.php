@@ -69,19 +69,17 @@ $result3 = mysqli_query($con, "SELECT * FROM owner_visibility_group");
             </form>
 
         </div>
-        <!-- add button container -->
-        <div class="ui left aligned container">
-            <button class="ui basic button" onclick="$('.ui.basic.modal').modal('show')">Product</button>
-        </div>
-        <!-- container -->
-        <div class="ui right aligned container">
-
-            <div class="field" style="position:absolute;left:1300px;">
-                <a>4 products</a>
+        <!-- add button grid -->
+        <div class="ui grid">
+            <div class="left floated five wide column">
+                <button class="ui basic button" onclick="$('.ui.basic.modal').modal('show')">Product</button>
             </div>
 
-            <div class="ui compact menu" style="position:absolute;left:1400px;">
-                <div class="ui simple dropdown item">
+            <!-- container -->
+            <div class="right floated five wide column">
+                <label>4 products</label>
+                <!-- middle dropdown -->
+                <div class="ui dropdown">
                     <i class="dropdown icon"></i>
                     <div class="menu">
                         <div class="item">
@@ -122,170 +120,155 @@ $result3 = mysqli_query($con, "SELECT * FROM owner_visibility_group");
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="ui compact menu" style="position:absolute;left:1500px;">
-                <div class="ui simple dropdown item">
-                    ...
-                    <!-- <i class="setting icon"></i> -->
-                    <div class="menu">
-                        <!-- modal -->
-                        <div class="ui result modal">
-                            <div class="field">
-                                <h2><label>Export results</label></h2>
+
+                <!-- right side setting -->
+                <div class="ui compact menu">
+                    <div class="ui simple dropdown item">
+                        ...
+                        <!-- <i class="setting icon"></i> -->
+                        <div class="menu">
+                            <!-- modal -->
+                            <?php include "export_results_modal.php" ?>
+                            <div class="item" onclick="$('.ui.result.modal').modal('show')">
+                                Export filter results...
                             </div>
-                            <div class="field">
-                                <h3><label>Choose file format for export</label></h3>
-                                <div class="ui checkbox">
-                                    <input type="checkbox" name="example">
-                                    <label>XLS (Excel)</label>
-                                </div>
-                                <br>
-                                <div class="ui checkbox">
-                                    <input type="checkbox" name="example">
-                                    <label>CSV (comma separated values)</label>
-                                </div>
-                            </div>
+                            <div class=" item">Data import...</div>
+                            <div class="item">Choice 3</div>
                         </div>
-                        <div class="item" onclick="$('.ui.result.modal').modal('show')">Export filter results...</div>
-                        <div class=" item">Data import...</div>
-                        <div class="item">Choice 3</div>
                     </div>
                 </div>
             </div>
         </div>
-        <!-- retrieve data with table from product table -->
-        <?php
-        if (mysqli_num_rows($result) > 0) {
-        ?>
+    </div>
 
-        <table class="ui celled table">
-            <thead>
-                <tr>
-                    <!-- checkbox column -->
-                    <th class="one wide">
-                        <div class="ui checkbox">
-                            <input type="checkbox" name="example">
-                            <label></label>
-                        </div>
-                    </th>
-                    <th class="two wide">Name</th>
-                    <th class="two wide">Product code</th>
-                    <th class="right aligned">
-                        <div class="ui compact menu">
-                            <div class="ui simple dropdown item">
-                                <i class="setting icon"></i>
-                                <div class="menu">
-                                    <div class="ui left aligned container">
+    <!-- retrieve data with table from product table -->
+    <?php
+    if (mysqli_num_rows($result) > 0) {
+    ?>
 
-                                        <div class="ui search">
-                                            <label>
-                                                <h3><span>Choose columns</span></h3>
-                                            </label>
-                                            <div class="ui icon input">
-                                                <input class="prompt" type="text" placeholder="Search owner or filter">
-                                                <i class="search icon"></i>
+    <table class="ui celled table">
+        <thead>
+            <tr>
+                <!-- checkbox column -->
+                <th class="one wide">
+                    <div class="ui checkbox">
+                        <input type="checkbox" name="example">
+                        <label></label>
+                    </div>
+                </th>
+                <th class="two wide">Name</th>
+                <th class="two wide">Product code</th>
+                <th class="right aligned">
+                    <div class="ui compact menu">
+                        <div class="ui simple dropdown item">
+                            <i class="setting icon"></i>
+                            <div class="menu">
+                                <div class="ui left aligned container">
+
+                                    <div class="ui search">
+                                        <label>
+                                            <h3><span>Choose columns</span></h3>
+                                        </label>
+                                        <div class="ui icon input">
+                                            <input class="prompt" type="text" placeholder="Search owner or filter">
+                                            <i class="search icon"></i>
+                                        </div>
+                                        <div class="results"></div>
+                                    </div>
+                                    <div class="ui justified container">
+                                        <label>Visible</label>
+                                        <div class="field">
+                                            <div class="ui radio checkbox">
+                                                <input type="radio" name="fruit" checked="" tabindex="0" class="hidden">
+                                                <label>Name</label>
                                             </div>
-                                            <div class="results"></div>
+                                        </div>
+                                        <div class="field">
+                                            <div class="ui radio checkbox">
+                                                <input type="radio" name="fruit" checked="" tabindex="0" class="hidden">
+                                                <label>Product code</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="ui justified container">
+                                        <label>Not visible</label>
+                                        <div class="field">
+                                            <div class="ui radio checkbox">
+                                                <input type="radio" name="fruit" checked="" tabindex="0" class="hidden">
+                                                <label>Tax</label>
+                                            </div>
+                                        </div>
+                                        <div class="field">
+                                            <div class="ui radio checkbox">
+                                                <input type="radio" name="fruit" checked="" tabindex="0" class="hidden">
+                                                <label>Unit</label>
+                                            </div>
+                                        </div>
+                                        <div class="field">
+                                            <div class="ui radio checkbox">
+                                                <input type="radio" name="fruit" checked="" tabindex="0" class="hidden">
+                                                <label>Category</label>
+                                            </div>
                                         </div>
                                         <div class="ui justified container">
-                                            <label>Visible</label>
                                             <div class="field">
-                                                <div class="ui radio checkbox">
-                                                    <input type="radio" name="fruit" checked="" tabindex="0"
-                                                        class="hidden">
-                                                    <label>Name</label>
-                                                </div>
-                                            </div>
-                                            <div class="field">
-                                                <div class="ui radio checkbox">
-                                                    <input type="radio" name="fruit" checked="" tabindex="0"
-                                                        class="hidden">
-                                                    <label>Product code</label>
-                                                </div>
+                                                <button class="ui labeled icon button">
+                                                    Default
+                                                </button>
+                                                <button class="ui labeled icon button">
+                                                    Cancel
+                                                </button>
+                                                <button class="ui labeled icon button" style="color:green;">
+                                                    Save
+                                                </button>
                                             </div>
                                         </div>
-                                        <div class="ui justified container">
-                                            <label>Not visible</label>
-                                            <div class="field">
-                                                <div class="ui radio checkbox">
-                                                    <input type="radio" name="fruit" checked="" tabindex="0"
-                                                        class="hidden">
-                                                    <label>Tax</label>
-                                                </div>
-                                            </div>
-                                            <div class="field">
-                                                <div class="ui radio checkbox">
-                                                    <input type="radio" name="fruit" checked="" tabindex="0"
-                                                        class="hidden">
-                                                    <label>Unit</label>
-                                                </div>
-                                            </div>
-                                            <div class="field">
-                                                <div class="ui radio checkbox">
-                                                    <input type="radio" name="fruit" checked="" tabindex="0"
-                                                        class="hidden">
-                                                    <label>Category</label>
-                                                </div>
-                                            </div>
-                                            <div class="ui justified container">
-                                                <div class="field">
-                                                    <button class="ui labeled icon button">
-                                                        Default
-                                                    </button>
-                                                    <button class="ui labeled icon button">
-                                                        Cancel
-                                                    </button>
-                                                    <button class="ui labeled icon button" style="color:green;">
-                                                        Save
-                                                    </button>
-                                                </div>
-                                            </div>
 
 
-                                        </div>
                                     </div>
                                 </div>
                             </div>
-                    </th>
-                </tr>
-            </thead>
-            <?php
-                $i = 0;
-                while ($row = mysqli_fetch_array($result)) {
-                ?>
-            <tbody>
-                <tr>
-                    <td>
-                        <div class="ui checkbox">
-                            <input type="checkbox" name="example">
-                            <label></label>
                         </div>
-                    </td>
-                    <td>
-                        <p><?= $row["product_name"]; ?></p>
-                        <!-- <button class="right attached ui button" onclick="clickOnPN('p')">Edit</button> -->
-                    </td>
+                </th>
+            </tr>
+        </thead>
+        <?php
+            $i = 0;
+            while ($row = mysqli_fetch_array($result)) {
+            ?>
+        <tbody>
+            <tr>
+                <td>
+                    <div class="ui checkbox">
+                        <input type="checkbox" name="example">
+                        <label></label>
+                    </div>
+                </td>
+                <td>
+                    <p><?= $row["product_name"]; ?></p>
+                    <!-- <button class="right attached ui button" onclick="clickOnPN('p')">Edit</button> -->
+                </td>
 
-                    <td><?= $row["product_code"]; ?>
-                        <!-- <span><button class="right attached ui button">Edit</button></span></td> -->
-                    <td>
+                <td><?= $row["product_code"]; ?>
+                    <!-- <span><button class="right attached ui button">Edit</button></span></td> -->
+                <td>
 
-                    </td>
+                </td>
 
-                </tr>
+            </tr>
 
-            </tbody>
-            <?php
-                    $i++;
-                }
-                ?>
-        </table>
+        </tbody>
+        <?php
+                $i++;
+            }
+            ?>
+    </table>
     </div>
     <?php
-        } else {
-            echo "No product here";
-        }
-?>
+    } else {
+        echo "No product here";
+    }
+    ?>
     <script>
     function clickOnPN(name) {
         $('p').empty()
