@@ -22,12 +22,15 @@
         <!-- add button grid -->
         <div class="ui grid">
             <div class="left floated five wide column">
-                <p><button class="ui basic button" onclick="$('.ui.basic.modal').modal('show')">Person</button></p>
-            </div>
 
+                <button class="ui basic button" onclick="$('.ui.basic.modal').modal('show')">Person</button>
+            </div>
             <!-- container -->
             <div class="right floated five wide column">
-                <label>4 persons</label>
+
+                <div class="item">
+                    <label>4 persons</label>
+                </div>
                 <!-- middle dropdown -->
                 <div class="ui dropdown">
                     <i class="dropdown icon"></i>
@@ -70,7 +73,6 @@
                         </div>
                     </div>
                 </div>
-
                 <!-- right side setting -->
                 <div class="ui compact menu">
                     <div class="ui simple dropdown item">

@@ -48,7 +48,9 @@
                 <div class="ui tag">
                     <button class="ui button basic active">Activated</button>
                     <button class="ui button basic">Deactivated</button>
-                    <button class="ui button primary right floated">Add users</button>
+                    <a href="add_users.php">
+                        <button class="ui button primary right floated">Add users</button>
+                    </a>
                 </div>
                 <div class="ui table">
                     <table class="ui very basic collapsing celled table">
