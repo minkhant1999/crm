@@ -21,7 +21,7 @@
                 <div class="menu">
                     <a class="item" href="users.php">User profile</a>
                     <a class="item" href="organizations.php">Settings</a>
-                    <a class="item" href="organizations.php">Add more users</a>
+                    <a class="item" href="users.php">Add more users</a>
                     <a class="item" href="organizations.php">Log out</a>
                 </div>
             </div>
