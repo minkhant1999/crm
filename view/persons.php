@@ -104,7 +104,7 @@
                     </div>
                 </th>
                 <th class="two wide">Name</th>
-                <th class="two wide">Product code</th>
+                <th class="two wide">Organization</th>
                 <th class="right aligned">
                     <div class="ui compact menu">
                         <div class="ui simple dropdown item">

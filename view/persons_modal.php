@@ -5,10 +5,6 @@
             <input type="text" name="name">
         </div>
         <div class="field">
-            <h2><label>Product code</label></h2>
-            <input type="text" name="product_code">
-        </div>
-        <div class="field">
             <h2><label>Organization</label></h2>
             <select name="organization_id">
                 <?php
