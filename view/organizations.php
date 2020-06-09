@@ -1,3 +1,8 @@
+<?php
+include_once 'db.php';
+$result = mysqli_query($con, "SELECT * FROM label");
+$result2 = mysqli_query($con, "SELECT * FROM owner_visibility_group");
+?>
 <!DOCTYPE html>
 <html lang="en">
 
