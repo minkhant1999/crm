@@ -52,19 +52,19 @@ if (isset($_POST['save'])) {
                 <form class="ui form" method="POST" action="">
                     <div class="field">
                         <label>Email</label>
-                        <input name="empty" type="text">
+                        <input name="email" type="text">
                     </div>
                     <div class="field">
                         <label>First name</label>
-                        <input name="empty" type="text">
+                        <input name="first_name" type="text">
                     </div>
                     <div class="field">
                         <label>Last name</label>
-                        <input name="empty" type="text">
+                        <input name="last_name" type="text">
                     </div>
                     <div class="field">
                         <label>Visibility group</label>
-                        <select class="ui dropdown" name="dropdown">
+                        <select class="ui dropdown" name="visibility_group_id">
                             <option value="">Unassigned users</option>
                             <option value="male">Management</option>
                             <option value="female">Example</option>

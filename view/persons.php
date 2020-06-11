@@ -20,7 +20,7 @@ $result3 = mysqli_query($con, "SELECT * FROM owner_visibility_group");
 <body>
     <div class="ui fluid container">
         <?php
-        include("header.php");
+        include("menu.php");
         ?>
         <!-- Modal -->
         <?php
