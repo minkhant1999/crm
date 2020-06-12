@@ -30,7 +30,7 @@
         </div>
         <!-- append custom field here -->
         <div class="field">
-            <select name="visibility_group_id">
+            <select name="owner_visibility_name">
                 <?php
                 while ($row = mysqli_fetch_array($result3)) :; ?>
                 <option value="<?php echo $row[0]; ?>">

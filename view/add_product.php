@@ -7,8 +7,8 @@ if (isset($_POST['save'])) {
     $unit = $_POST['unit'];
     $unit_price = $_POST['unit_price'];
     $currency = $_POST['currency'];
-    $visibility_group_id = $_POST['visibility_group_id'];
-    $sql = "INSERT INTO product (product_name,product_code,unit,unit_price,currency,visibility_group_id) VALUES ('$product_name','$product_code','$unit','$unit_price','$currency','$visible_to')";
+    $visible_to = $_POST['owner_visibility_name'];
+    $sql = "INSERT INTO product (product_name,product_code,unit,unit_price,currency,owner_visibility_name) VALUES ('$product_name','$product_code','$unit','$unit_price','$currency','$visible_to')";
     $sql2 = "INSERT INTO category (category_name) VALUE ('$category_name')";
     if (mysqli_query($con, $sql) && mysqli_query($con, $sql2)) {
 

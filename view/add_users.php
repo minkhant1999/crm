@@ -1,24 +1,101 @@
 <?php
-include_once 'db.php';
-if (isset($_POST['save'])) {
-    $email = $_POST['email'];
-    $first_name = $_POST['first_name'];
-    $last_name = $_POST['last_name'];
-    $unit = $_POST['unit'];
-    $unit_price = $_POST['unit_price'];
-    $currency = $_POST['currency'];
-    $visible_to = $_POST['visibility'];
-    $sql = "INSERT INTO product (product_name,product_code,unit,unit_price,currency,visibility) VALUES ('$product_name','$product_code','$unit','$unit_price','$currency','$visible_to')";
-    $sql2 = "INSERT INTO category (category_name) VALUE ('$category_name')";
-    if (mysqli_query($con, $sql) && mysqli_query($con, $sql2)) {
+require_once 'db.php';
+$list = mysqli_query($con, "SELECT * FROM visibility_group");
 
-        echo ("New product created successfully !");
-        header('location: index.php');
+
+// Define variables and initialize with empty values
+$first_name = $last_name = $email = $visibility_group = "";
+$first_name_err = $last_name_err = $email_err = $visibility_group_err = "";
+
+// Processing form data when form is submitted
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
+    // Validate first name
+    if (empty(trim($_POST["first_name"]))) {
+        $first_name_err = "Please enter a first name.";
     } else {
-        echo "Error: " . $sql . "
-" . mysqli_error($con);
+        $first_name = trim($_POST["first_name"]);
     }
-    mysqli_close($con);
+
+    // Validate last name
+    if (empty(trim($_POST["last_name"]))) {
+        $last_name_err = "Please enter a last name.";
+    } else {
+        $last_name = trim($_POST["last_name"]);
+    }
+
+    // Validate username
+    if (empty(trim($_POST["email"]))) {
+        $email_err = "Please enter a email.";
+    } else {
+        // Prepare a select statement
+        $sql = "SELECT id FROM user WHERE email = ?";
+
+        if ($stmt = mysqli_prepare($con, $sql)) {
+            // Bind variables to the prepared statement as parameters
+            mysqli_stmt_bind_param($stmt, "s", $param_email);
+
+            // Set parameters
+            $param_email = trim($_POST["email"]);
+
+            // Attempt to execute the prepared statement
+            if (mysqli_stmt_execute($stmt)) {
+                /* store result */
+                mysqli_stmt_store_result($stmt);
+
+                if (mysqli_stmt_num_rows($stmt) == 1) {
+                    $email_err = "This email is already taken.";
+                } else {
+                    $email = trim($_POST["email"]);
+                }
+            } else {
+                echo "Oops! Something went wrong. Please try again later.";
+            }
+
+            // Close statement
+            mysqli_stmt_close($stmt);
+        }
+    }
+    // Validate password
+    if (empty(trim($_POST["password"]))) {
+        $password_err = "Please enter a password.";
+    } elseif (strlen(trim($_POST["password"])) < 6) {
+        $password_err = "Password must have atleast 6 characters.";
+    } else {
+        $password = trim($_POST["password"]);
+
+        // Check input errors before inserting in database
+        if (empty($first_name_err) && empty($last_name_err) && empty($email_err) && empty($visibility_group_err)) {
+
+            // Prepare an insert statement
+            $sql = "INSERT INTO user (first_name,last_name,email, visibility_group) VALUES (?, ?, ?, ?)";
+
+            if ($stmt = mysqli_prepare($con, $sql)) {
+                // Bind variables to the prepared statement as parameters
+                mysqli_stmt_bind_param($stmt, "ssss", $param_first_name, $param_last_name, $param_email, $param_visibility_group);
+
+                // Set parameters
+                $param_first_name = $first_name;
+                $param_last_name = $last_name;
+                $param_email = $email;
+                $param_visibility_group = password_hash($visibility_group, PASSWORD_DEFAULT); // Creates a password hash
+
+                // Attempt to execute the prepared statement
+                if (mysqli_stmt_execute($stmt)) {
+                    // Redirect to login page
+                    header("location: login.php");
+                } else {
+                    echo "Something went wrong. Please try again later.";
+                }
+
+                // Close statement
+                mysqli_stmt_close($stmt);
+            }
+        }
+
+        // Close connection
+        mysqli_close($con);
+    }
 }
 ?>
 <!DOCTYPE html>
@@ -36,7 +113,7 @@ if (isset($_POST['save'])) {
 <body>
     <div class="ui fluid container">
 
-        <?php include "header.php"; ?>
+        <?php include "menu.php"; ?>
         <div class="ui container segment very padded raised ">
             <h2 class="ui header">Manage Users</h2>
             <div class="ui top attached tabular menu">
@@ -49,31 +126,32 @@ if (isset($_POST['save'])) {
                 <div class="ui tag">
                     <h2>Add users</h2>
                 </div>
-                <form class="ui form" method="POST" action="">
+                <form class="ui form" method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
                     <div class="field">
                         <label>Email</label>
-                        <input name="email" type="text">
+                        <input name="email" type="email" value="<?php echo $email; ?>">
                     </div>
                     <div class="field">
                         <label>First name</label>
-                        <input name="first_name" type="text">
+                        <input name="first_name" type="text" value="<?php echo $first_name; ?>">
                     </div>
                     <div class="field">
                         <label>Last name</label>
-                        <input name="last_name" type="text">
+                        <input name="last_name" type="text" value="<?php echo $last_name; ?>">
                     </div>
                     <div class="field">
                         <label>Visibility group</label>
-                        <select class="ui dropdown" name="visibility_group_id">
-                            <option value="">Unassigned users</option>
-                            <option value="male">Management</option>
-                            <option value="female">Example</option>
+                        <select name="visibility_group">
+                            <?php
+                            while ($row = mysqli_fetch_assoc($list)) :; ?>
+                            <option value="<?php echo $row[0]; ?>">
+                                <?php echo $row[1]; ?></option>
+
+                            <?php endwhile; ?>
                         </select>
                     </div>
                     <div class="ui submit button">Cancel</div>
-                    <div class="ui submit icon button">Confirm and invite users</div>
-                    <a class="ui submit">+Add one more user
-                    </a>
+                    <input type="submit" class="ui submit icon button"" value=" Confirm and invite users">
                     <div class="ui error message"></div>
                 </form>
             </div>
