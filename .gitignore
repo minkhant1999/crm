@@ -2,3 +2,5 @@ jtest.js
 *.sqlite
 db.cached.json
 tables.sqlite
+vendor/
+index.php/

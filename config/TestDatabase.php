@@ -1,5 +1,6 @@
 <?php
-class Database
+
+class TestDatabase
 {
   // DB Params
   private $host = 'localhost';

@@ -24,7 +24,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $last_name = trim($_POST["last_name"]);
     }
 
-    // Validate username
+    // Validate email
     if (empty(trim($_POST["email"]))) {
         $email_err = "Please enter a email.";
     } else {
@@ -56,19 +56,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             mysqli_stmt_close($stmt);
         }
     }
+
+
     // Validate password
-    if (empty(trim($_POST["password"]))) {
-        $password_err = "Please enter a password.";
-    } elseif (strlen(trim($_POST["password"])) < 6) {
-        $password_err = "Password must have atleast 6 characters.";
+    if (empty(trim($_POST["visibility_group"]))) {
+        $visibility_group_err = "Please select a visibility group.";
     } else {
-        $password = trim($_POST["password"]);
+        $visibility_group = trim($_POST["visibility_group"]);
 
         // Check input errors before inserting in database
         if (empty($first_name_err) && empty($last_name_err) && empty($email_err) && empty($visibility_group_err)) {
 
             // Prepare an insert statement
-            $sql = "INSERT INTO user (first_name,last_name,email, visibility_group) VALUES (?, ?, ?, ?)";
+            $sql = "INSERT INTO user (first_name,last_name,email,visibility_group) VALUES (?, ?, ?, ?)";
 
             if ($stmt = mysqli_prepare($con, $sql)) {
                 // Bind variables to the prepared statement as parameters
@@ -78,12 +78,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $param_first_name = $first_name;
                 $param_last_name = $last_name;
                 $param_email = $email;
-                $param_visibility_group = password_hash($visibility_group, PASSWORD_DEFAULT); // Creates a password hash
+                $param_visibility_group = $visibility_group;
 
                 // Attempt to execute the prepared statement
                 if (mysqli_stmt_execute($stmt)) {
                     // Redirect to login page
-                    header("location: login.php");
+                    header("location: users.php");
                 } else {
                     echo "Something went wrong. Please try again later.";
                 }
@@ -141,9 +141,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     </div>
                     <div class="field">
                         <label>Visibility group</label>
-                        <select name="visibility_group">
+                        <select type="select" name="visibility_group" value="<?php echo $visibility_group; ?>">
                             <?php
-                            while ($row = mysqli_fetch_assoc($list)) :; ?>
+                            while ($row = mysqli_fetch_array($list)) :; ?>
                             <option value="<?php echo $row[0]; ?>">
                                 <?php echo $row[1]; ?></option>
 
@@ -151,7 +151,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         </select>
                     </div>
                     <div class="ui submit button">Cancel</div>
-                    <input type="submit" class="ui submit icon button"" value=" Confirm and invite users">
+                    <input type="submit" class="ui submit icon button" value="Confirm and invite users">
                     <div class="ui error message"></div>
                 </form>
             </div>

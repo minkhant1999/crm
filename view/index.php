@@ -1,4 +1,8 @@
 <?php
+register_shutdown_function(function () {
+    echo "\033[0m";
+    echo "FUCK UUUUUUU!!!!!!!";
+});
 // Initialize the session
 session_start();
 

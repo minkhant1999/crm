@@ -23,7 +23,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $last_name = trim($_POST["last_name"]);
     }
 
-    // Validate username
+    // Validate email
     if (empty(trim($_POST["email"]))) {
         $email_err = "Please enter a email.";
     } else {
