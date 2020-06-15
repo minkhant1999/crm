@@ -8,7 +8,7 @@ require_once "db.php";
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Teams</title>
+    <title>Permission sets</title>
     <link rel="stylesheet" type="text/css" href="https://etherio.github.io/cdn/semantic/semantic.css" />
     <script src="https://etherio.github.io/cdn/jquery/jquery.min.js"></script>
     <script src="https://etherio.github.io/cdn/semantic/semantic.js" defer></script>
@@ -40,7 +40,7 @@ require_once "db.php";
 
 <body>
     <div class="ui fluid container">
-        <?php include("teams_modal.php"); ?>
+        <?php include("visibility_groups_modal.php"); ?>
 
 
         <?php include "menu.php"; ?>
@@ -48,28 +48,28 @@ require_once "db.php";
             <h2 class="ui header">Manage Users</h2>
             <div class="ui top attached tabular menu">
                 <a class="item" data-tab="first">Users</a>
-                <a class="item" data-tab="second">Permission sets</a>
+                <a class="item active" data-tab="second">Permission sets</a>
                 <a class="item" data-tab="third">Visibility groups</a>
-                <a class="item active" data-tab="third">Teams</a>
+                <a class="item" data-tab="third">Teams</a>
             </div>
-            <div class="ui bottom attached tab segment active" data-tab="third">
-                <div class="column">
-                    <div class="ui one column grid">
-                        <div class="column">
-                            <label for="first">Teams</label>
-                            <div>
-                                <button class="ui basic button" onclick="$('.ui.basic.modal').modal('show')">+Add
-                                    team</button>
-                            </div>
-                            <div class="ui divider"></div>
-                            <div class="ui container">
-                                <!-- fetch results from database -->
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <div class="ui container">
+                <table class="ui compact celled table">
+                    <thead>
+                        <tr>
+                            <th>Sets</th>
+                            <th>Users</th>
+                            <th>Permissions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
-
         </div>
 </body>
 

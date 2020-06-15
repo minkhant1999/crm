@@ -33,7 +33,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         if ($stmt = mysqli_prepare($con, $sql)) {
             // Bind variables to the prepared statement as parameters
-            mysqli_stmt_bind_param($stmt, "sss", $param_group_name, $param_parent_group);
+            mysqli_stmt_bind_param($stmt, "sis", $param_group_name, $param_parent_group, $param_description);
 
             // Set parameters
             $param_team_name = $team_name;
@@ -65,7 +65,27 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </div>
         <div class="field">
             <h2><label>Team manager</label></h2>
-            <input type="text" name="team_manager" value="<?php echo $team_manager ?>">
+            <select name="team_manager" class="ui dropdown" id="select">
+                <option value="">--- Select ---</option>
+                <?  
+                mysql_connect ("localhost","root","");  
+                mysql_select_db ("achievement crm");  
+                $select="achievement crm";  
+                if (isset ($select)&&$select!=""){  
+                $select=$_POST ['team_manager'];  
+            }  
+            ?>
+                <?  
+                $list=mysql_query("select * from user order by id asc");  
+            while($row_list=mysql_fetch_assoc($list)){  
+                ?>
+                <option value="<? echo $row_list['id']; ?>" <? if($row_list['id']==$select){ echo "selected" ; } ?>>
+                    <?echo $row_list['first_name'];?>
+                </option>
+                <?  
+                }  
+                ?>
+            </select>
         </div>
         <div class="field">
             <h2><label>Team description</label></h2>
