@@ -60,17 +60,42 @@ require_once "db.php";
                         <div class="first column">
                             <label for="first">Groups</label>
                             <div class="ui divider"></div>
-                            <a href="" class="item">Default group</a>
-
-                            <div>
-                                <button class="ui basic button" onclick="$('.ui.basic.modal').modal('show')">Add group
-                                    or
-                                    sub-group</button>
+                            <div class="ui container">
+                                <?php
+                                $result = mysqli_query($con, "SELECT * FROM visibility_group");
+                                while ($row = mysqli_fetch_array($result)) {
+                                ?>
+                                <label><?php echo $row['visibility_group_name'] ?><br><br></label>
+                                <?php
+                                }
+                                ?>
                             </div>
+
                         </div>
                         <div class="second column">
                             <label for="second">Users</label>
                             <div class="ui divider"></div>
+                            <div class="ui container">
+                                <?php
+                                $result2 = mysqli_query($con, "SELECT * FROM user");
+                                while ($row = mysqli_fetch_array($result2)) {
+                                ?>
+                                <label><?php
+                                            echo $row['first_name'];
+                                            echo "\n";
+                                            echo $row['last_name'];
+                                            ?><br><br></label>
+                                <?php
+                                }
+                                ?>
+                                <select>
+                                    <?php
+                                    while ($row = mysqli_fetch_array($result2)) :; ?>
+                                    <option value="<?php echo $row[0]; ?>">
+                                        <?php echo $row[1]; ?></option>
+                                    <?php endwhile; ?>
+                                </select>
+                            </div>
                         </div>
                         <div class="third column">
                             <label for="third">Who can see items created by users in this group?</label>
@@ -80,7 +105,11 @@ require_once "db.php";
                     </div>
                 </div>
             </div>
-
+            <div>
+                <button class="ui basic button" onclick="$('.ui.basic.modal').modal('show')">Add group
+                    or
+                    sub-group</button>
+            </div>
         </div>
 </body>
 

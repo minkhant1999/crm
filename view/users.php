@@ -1,3 +1,6 @@
+<?php
+require_once "db.php";
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -53,6 +56,7 @@
                     </a>
                 </div>
                 <div class="ui table">
+
                     <table class="ui very basic collapsing celled table">
                         <thead>
                             <tr>
@@ -60,33 +64,41 @@
                                 <th>Visibility group</th>
                                 <th>Permission set</th>
                                 <th>Last login</th>
+                                <th></th>
                             </tr>
                         </thead>
                         <tbody>
+                            <?php
+                            $result = mysqli_query($con, "SELECT * FROM user");
+                            while ($row = mysqli_fetch_array($result)) {
+                            ?>
                             <tr>
                                 <td>
                                     <h4 class="ui image header">
                                         <img src="https://semantic-ui.com/images/avatar2/small/lena.png"
                                             class="ui mini rounded image">
                                         <div class="content">
-                                            Lena
-                                            <div class="sub header">users@example.com
+                                            <?= $row['first_name'] ?>
+                                            <?= $row['last_name'] ?>
+                                            <div class="sub header">
+                                                <?= $row['email'] ?>
                                             </div>
                                         </div>
                                     </h4>
                                 </td>
-                                <td>
-                                    Management
-                                </td>
-                                <td>Admin Users</td>
-                                <td>January 1 1970 00:00:00</td>
+                                <td> <?= $row['visibility_group'] ?></td>
+                                <td><?= $row['permission_set'] ?></td>
+                                <td><?= $row['last_login'] ?></td>
+                                <td><a href="">Statistic</a>
                             </tr>
                         </tbody>
+                        <?php
+                            }
+                    ?>
                     </table>
+
                 </div>
-
             </div>
-
         </div>
 </body>
 

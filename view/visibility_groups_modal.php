@@ -55,20 +55,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <h2><label>Group name</label></h2>
             <input type="text" name="visibility_group_name" value="<?php echo $visibility_group_name ?>">
         </div>
-        <div class="field">
-            <h2><label>Parent</label></h2>
-            <input type="text" name="" value="<?php echo $parent_group ?>">
-        </div>
+
         <div class="field">
             <h2><label>Parent group</label></h2>
-            <input type="text">
             <select name="parent_group">
                 <?php
-                $vg_query = "SELECT visibility_group_name FROM visibility_group";
+                $vg_query = "SELECT * FROM visibility_group";
                 $result = mysqli_query($con, $vg_query);
                 /* associative array */
-                $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
-                echo "<option value='" . $row['visibility_group_name'] . "'>" . $row['visibility_group_name'] . "</option>";
+                while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
+                    echo "<option value='" . $row['visibility_group_name'] . "'>" . $row['visibility_group_name'] . "</option>";
+                }
                 ?>
             </select>
         </div>
