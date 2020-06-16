@@ -57,16 +57,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </div>
         <div class="field">
             <h2><label>Parent</label></h2>
-            <input type="text" name="parent_group" value="<?php echo $parent_group ?>">
+            <input type="text" name="" value="<?php echo $parent_group ?>">
         </div>
-        <!-- <div class="field">
+        <div class="field">
             <h2><label>Parent group</label></h2>
-            <select name="parent_group" value="<">
-                <option>
-                    None
-                </option>
+            <input type="text">
+            <select name="parent_group">
+                <?php
+                $vg_query = "SELECT visibility_group_name FROM visibility_group";
+                $result = mysqli_query($con, $vg_query);
+                /* associative array */
+                $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
+                echo "<option value='" . $row['visibility_group_name'] . "'>" . $row['visibility_group_name'] . "</option>";
+                ?>
             </select>
-        </div> -->
+        </div>
         <!-- append custom field here -->
         <button class="ui button" type="submit" name="save">SAVE</button>
     </form>

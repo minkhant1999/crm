@@ -29,30 +29,12 @@ body {
     margin-bottom: 110px;
 }
 </style>
-<!--- Example Javascript -->
-<script>
-$(document)
-    .ready(function() {
-        $('.ui.menu .ui.dropdown').dropdown({
-            on: 'hover'
-        });
-        $('.ui.menu a.item')
-            .on('click', function() {
-                $(this)
-                    .addClass('active')
-                    .siblings()
-                    .removeClass('active');
-            });
-    });
-</script>
-
 
 <body>
     <?php
     include("menu.php");
     ?>
     <div class="ui divider"></div>
-
     <!-- Modal -->
     <?php
     include("product_modal.php");
@@ -67,7 +49,6 @@ $(document)
                     <label>4 products</label>
                 </div>
                 <div class="second column">
-                    <!-- middle dropdown -->
                     <div class="ui menu">
                         <div class="ui dropdown">
                             <i class="dropdown icon"></i>

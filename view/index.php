@@ -1,7 +1,7 @@
 <?php
 register_shutdown_function(function () {
     echo "\033[0m";
-    echo "FUCK UUUUUUU!!!!!!!";
+    //echo "FUCK UUUUUUU!!!!!!!";
 });
 // Initialize the session
 session_start();
@@ -99,6 +99,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta charset="UTF-8">
     <title>Login</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="https://etherio.github.io/cdn/semantic/semantic.css" />
+    <script src="https://etherio.github.io/cdn/jquery/jquery.min.js"></script>
+    <script src="https://etherio.github.io/cdn/semantic/semantic.js" defer></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <style type="text/css">
     body {
         font: 14px sans-serif;
@@ -112,7 +116,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </head>
 
 <body>
+    <?php include "menu1.php"; ?>
+
     <div class="wrapper">
+
         <h2>Login</h2>
         <p>Please fill in your credentials to login.</p>
         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">

@@ -10,14 +10,17 @@
         </div>
         <div class="field">
             <h2><label>Category</label></h2>
-            <select name="category_name">
+            <select name="category_id">
                 <?php
-                while ($row = mysqli_fetch_array($result2)) :; ?> <option value="<?php echo $row[0]; ?>">
-                    <?php echo $row[1]; ?></option>
+                while ($row = mysqli_fetch_array($result2)) {
 
-                <?php endwhile; ?>
+                    echo "<option value='" . $row['category_id'] . "' >" . $row['category_name'] . "</option>";
+                }
+
+                ?>
+                ;
+
             </select>
-
         </div>
         <div class="field">
             <h2><label>Unit</label></h2>

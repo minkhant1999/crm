@@ -1,28 +1,47 @@
 <?php
+
+register_shutdown_function(function () {
+    $curr = memory_get_usage();
+    $peak = memory_get_peak_usage();
+    $curr /= 1000;
+    $peak /= 1000;
+
+    echo '<hr> <pre>Current Usage: ', round($curr, 2), 'KB</pre> <br> <pre> Peak Memory: ', round($peak, 2), 'KB</pre>';
+});
+
 require_once "db.php";
 
-$team_name = $team_manager = $team_description = "";
-$team_name_err = $team_manager_err = $team_description_err = "";
-
+$team_name = $team_manager = $team_description = $team_members = "";
+$team_name_err = $team_manager_err = $team_description_err = $team_members_err = "";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $post = array_replace([
+        'team_name' => null,
+        'team_manager' => null,
+        'team_description' => null,
+        'team_members' => null,
+        'team_owner' => 'me',
+    ], $_POST);
 
-    if (empty(trim($_POST["team_name"]))) {
+    extract($post);
+    unset($post);
+
+    if (empty(trim($team_name))) {
         $team_name_err = "Enter team name";
     } else {
-        $team_name = trim($_POST["team_name"]);
+        $team_name = trim($team_name);
     }
 
-    if (empty(trim($_POST["team_manager"]))) {
+    if (empty(trim($team_manager))) {
         $team_manager_err = "Enter manager name";
     } else {
-        $team_manager = trim($_POST["team_manager"]);
+        $team_manager = trim($team_manager);
     }
 
-    if (empty(trim($_POST["team_description"]))) {
+    if (empty(trim($team_description))) {
         $team_description_err = "Choose parent group";
     } else {
-        $team_description = trim($_POST["team_description"]);
+        $team_description = trim($team_description);
     }
 
     // Check input errors before inserting in database
@@ -52,53 +71,43 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             mysqli_stmt_close($stmt);
         }
     }
+    echo '<pre>Your :', json_encode(get_defined_vars(), JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES), '</pre>';
 
+    die(microtime(true));
     // Close connection
     mysqli_close($con);
 }
 ?>
 <div class="ui basic modal">
-    <form class="ui form" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
+    <form class="ui form" method="post" action="<?php echo _($_SERVER["PHP_SELF"]); ?>">
         <div class="field">
             <h2><label>Team name</label></h2>
             <input type="text" name="team_name" value="<?php echo $team_name ?>">
         </div>
         <div class="field">
             <h2><label>Team manager</label></h2>
-            <select name="team_manager" class="ui dropdown" id="select">
-                <option value="">--- Select ---</option>
-                <?  
-                mysql_connect ("localhost","root","");  
-                mysql_select_db ("achievement crm");  
-                $select="achievement crm";  
-                if (isset ($select)&&$select!=""){  
-                $select=$_POST ['team_manager'];  
-            }  
-            ?>
-                <?  
-                $list=mysql_query("select * from user order by id asc");  
-            while($row_list=mysql_fetch_assoc($list)){  
+            <select name="team_manager">
+                <?php
+                $user_query = mysqli_query($con, "SELECT id FROM user");
+
+                while ($row = mysqli_fetch_array($user_query)) {
+
+                    echo "<option value='" . $row['first_name'] . "' >" . $row['last_name'] . "</option>";
+                }
+
                 ?>
-                <option value="<? echo $row_list['id']; ?>" <? if($row_list['id']==$select){ echo "selected" ; } ?>>
-                    <?echo $row_list['first_name'];?>
-                </option>
-                <?  
-                }  
-                ?>
+                ;
+
             </select>
         </div>
         <div class="field">
             <h2><label>Team description</label></h2>
-            <input type="text" name="team_description" value="<?php echo $team_description ?>">
+            <input type="text" name="team_description" value="<?= $team_description ?>">
         </div>
-        <!-- <div class="field">
-            <h2><label>Parent group</label></h2>
-            <select name="parent_group" value="<">
-                <option>
-                    None
-                </option>
-            </select>
-        </div> -->
+        <div class="field">
+            <h2><label>Team members</label></h2>
+            <input type="radioc" name="team_description" value="<?= $team_members ?>">
+        </div>
         <!-- append custom field here -->
         <button class="ui button" type="submit" name="save">SAVE</button>
     </form>

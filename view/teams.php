@@ -47,10 +47,10 @@ require_once "db.php";
         <div class="ui container segment very padded raised ">
             <h2 class="ui header">Manage Users</h2>
             <div class="ui top attached tabular menu">
-                <a class="item" data-tab="first">Users</a>
-                <a class="item" data-tab="second">Permission sets</a>
-                <a class="item" data-tab="third">Visibility groups</a>
-                <a class="item active" data-tab="third">Teams</a>
+                <a href="users.php" class="item" data-tab="first">Users</a>
+                <a href="permissions.php" class="item" data-tab="second">Permission sets</a>
+                <a href="visibility-groups.php" class="item" data-tab="third">Visibility groups</a>
+                <a href="teams.php" class="item active" data-tab="third">Teams</a>
             </div>
             <div class="ui bottom attached tab segment active" data-tab="third">
                 <div class="column">

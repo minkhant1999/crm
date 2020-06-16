@@ -39,10 +39,10 @@
         <div class="ui container segment very padded raised ">
             <h2 class="ui header">Manage Users</h2>
             <div class="ui top attached tabular menu">
-                <a class="item active" data-tab="first">Users</a>
-                <a class="item" data-tab="second">Permission sets</a>
-                <a class="item" data-tab="third">Visibility groups</a>
-                <a class="item" data-tab="third">Teams</a>
+                <a href="users.php" class="item active" data-tab="first">Users</a>
+                <a href="permissions.php" class="item" data-tab="second">Permission sets</a>
+                <a href="visibility-groups.php" class="item" data-tab="third">Visibility groups</a>
+                <a href="teams.php" class="item" data-tab="third">Teams</a>
             </div>
             <div class="ui bottom attached tab segment active" data-tab="first">
                 <div class="ui tag">

@@ -25,6 +25,6 @@
                 <input type="text" placeholder="Search">
             </div>
         </div>
-        <a class="ui item button" href="login.php">log in</a>
+        <a class="ui item button" href="register.php">Create an account</a>
     </div>
 </div>
