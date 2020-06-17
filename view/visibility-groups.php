@@ -90,10 +90,13 @@ require_once "db.php";
                                 ?>
                                 <select>
                                     <?php
-                                    while ($row = mysqli_fetch_array($result2)) :; ?>
-                                    <option value="<?php echo $row[0]; ?>">
-                                        <?php echo $row[1]; ?></option>
-                                    <?php endwhile; ?>
+                                    $result3 = mysqli_query($con, "SELECT * FROM user");
+                                    while ($row = mysqli_fetch_array($result3)) {
+                                        echo "<option value=\"{$row['first_name']}\"> {$row['last_name']}</option>";
+                                        // echo "<button type="edit">"edit"</button>";
+                                        $row++;
+                                    }
+                                    ?>
                                 </select>
                             </div>
                         </div>
