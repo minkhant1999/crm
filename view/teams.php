@@ -56,15 +56,29 @@ require_once "db.php";
                     <div class="ui one column grid">
                         <div class="column">
                             <label for="first">Teams</label>
-                            <div>
-                                <button class="ui basic button" onclick="$('.ui.basic.modal').modal('show')">+Add
-                                    team</button>
-                            </div>
+
                             <div class="ui divider"></div>
                             <div class="ui container">
                                 <!-- fetch results from database -->
+                                <?php
+                                $result_team = mysqli_query($con, "SELECT id FROM team");
+                                while ($row = mysqli_fetch_array($result_team)) {
+                                ?>
+                                <label><?php
+                                            echo $row['team_name'];
+                                            echo $row['team_manager'];
+                                            echo $row['team_description'];
+                                            echo $row['team_members'];
+                                            ?><br><br></label>
+                                <?php
+                                }
+                                ?>
                             </div>
                         </div>
+                    </div>
+                    <div>
+                        <button class="ui basic button" onclick="$('.ui.basic.modal').modal('show')">+Add
+                            team</button>
                     </div>
                 </div>
             </div>

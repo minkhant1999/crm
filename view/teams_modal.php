@@ -75,13 +75,13 @@ mysqli_close($con);
         </div>
         <div class="field">
             <h2><label>Team manager</label></h2>
-            <select name="team_manager">
+            <select>
                 <?php
-                $team_query = "SELECT first_name,last_name FROM user";
-                $result = mysqli_query($con, $team_query);
-                /* associative array */
-                $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
-                echo "<option value='" . $row["first_name"] . "'>" . $row["last_name"] . "</option>";
+                $result3 = mysqli_query($con, "SELECT id FROM user");
+                while ($row = mysqli_fetch_array($result3)) {
+                    echo "<option value=\"{$row['first_name']}\"> {$row['last_name']}</option>";
+                    $row++;
+                }
                 ?>
             </select>
         </div>

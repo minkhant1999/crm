@@ -58,7 +58,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         <div class="field">
             <h2><label>Parent group</label></h2>
-            <select name="parent_group">
+            <select name="parent_group" value="<?= $parent_group ?>">
                 <?php
                 $vg_query = "SELECT * FROM visibility_group";
                 $result = mysqli_query($con, $vg_query);
